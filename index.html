@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes, viewport-fit=cover">
-    <title>PrimeLend · Smart Loan Calculator</title>
+    <title>InnBucks · Smart Loan Calculator</title>
     <style>
         * {
             margin: 0;
@@ -19,7 +19,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 16px;
         }
 
         .app-container {
@@ -31,79 +31,123 @@
         .calculator-card {
             background: rgba(17, 24, 39, 0.8);
             backdrop-filter: blur(10px);
-            border-radius: 48px;
+            border-radius: 40px;
             border: 1px solid rgba(20, 184, 166, 0.15);
-            padding: 28px 24px 32px;
+            padding: 20px 20px 22px;
         }
 
         .card-title {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 800;
             background: linear-gradient(135deg, #ffffff, #14b8a6);
             background-clip: text;
             -webkit-background-clip: text;
             color: transparent;
-            margin-bottom: 28px;
-            padding-bottom: 12px;
+            margin-bottom: 4px;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        /* InnBucks Tagline Styles */
+        .inn-tagline {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 8px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
             border-bottom: 2px solid rgba(20, 184, 166, 0.3);
+        }
+        .inn-tagline-text {
+            font-size: 0.7rem;
+            font-weight: 500;
+            color: #14b8a6;
+            letter-spacing: 0.5px;
+            background: rgba(20, 184, 166, 0.1);
+            padding: 3px 10px;
+            border-radius: 40px;
+        }
+
+        /* USSD Banner Styles */
+        .ussd-banner {
+            background: linear-gradient(135deg, rgba(20, 184, 166, 0.15), rgba(20, 184, 166, 0.05));
+            border-radius: 20px;
+            padding: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+            border: 1px solid rgba(20, 184, 166, 0.3);
+        }
+        .ussd-code {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #14b8a6;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+        .ussd-text {
+            font-size: 0.7rem;
+            color: #94a3b8;
+        }
+        .ussd-text strong {
+            color: #14b8a6;
         }
 
         .slider-group {
-            margin-bottom: 32px;
+            margin-bottom: 20px;
         }
 
         .slider-header {
             display: flex;
             justify-content: space-between;
             align-items: baseline;
-            margin-bottom: 14px;
+            margin-bottom: 8px;
         }
 
         .slider-label {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: #cbd5e1;
         }
 
         .slider-value {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 700;
             color: #14b8a6;
             background: rgba(20, 184, 166, 0.1);
-            padding: 6px 14px;
+            padding: 4px 12px;
             border-radius: 40px;
         }
 
         .custom-slider {
             width: 100%;
-            height: 5px;
+            height: 4px;
             -webkit-appearance: none;
             appearance: none;
             background: #1e2a3a;
             border-radius: 20px;
             outline: none;
-            margin: 16px 0 6px;
+            margin: 12px 0 4px;
         }
 
         .custom-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 26px;
-            height: 26px;
+            width: 22px;
+            height: 22px;
             border-radius: 50%;
             background: #14b8a6;
             cursor: pointer;
-            box-shadow: 0 0 0 2px #0f172a, 0 0 0 4px rgba(20, 184, 166, 0.4);
+            box-shadow: 0 0 0 2px #0f172a, 0 0 0 3px rgba(20, 184, 166, 0.4);
         }
 
         .custom-slider:active::-webkit-slider-thumb {
-            transform: scale(1.2);
+            transform: scale(1.15);
         }
 
         .range-labels {
             display: flex;
             justify-content: space-between;
-            margin-top: 8px;
-            font-size: 0.65rem;
+            margin-top: 4px;
+            font-size: 0.6rem;
             color: #5c6f87;
         }
 
@@ -111,36 +155,36 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 16px;
-            padding-top: 16px;
+            margin-top: 12px;
+            padding-top: 12px;
             border-top: 1px solid rgba(20, 184, 166, 0.15);
         }
 
         .interest-label {
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             font-weight: 600;
             color: #cbd5e1;
         }
 
         .interest-value {
-            font-size: 1rem;
+            font-size: 0.85rem;
             font-weight: 700;
             color: #14b8a6;
             background: rgba(20, 184, 166, 0.1);
-            padding: 6px 18px;
+            padding: 4px 16px;
             border-radius: 40px;
         }
 
         .result-section {
             text-align: center;
-            margin: 24px 0 20px;
-            padding: 20px;
+            margin: 16px 0 16px;
+            padding: 14px;
             background: linear-gradient(135deg, rgba(20, 184, 166, 0.05), rgba(20, 184, 166, 0.02));
-            border-radius: 32px;
+            border-radius: 28px;
         }
 
         .result-amount {
-            font-size: 3.5rem;
+            font-size: 2.8rem;
             font-weight: 800;
             background: linear-gradient(145deg, #ffffff, #14b8a6);
             background-clip: text;
@@ -149,24 +193,25 @@
         }
 
         .result-label-text {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             font-weight: 500;
             color: #7e8aa2;
-            margin-top: 8px;
+            margin-top: 4px;
         }
 
         .apply-btn {
             width: 100%;
             background: linear-gradient(135deg, #14b8a6, #0d9488);
             border: none;
-            padding: 18px 20px;
-            font-size: 1.1rem;
+            padding: 14px 20px;
+            font-size: 1rem;
             font-weight: 700;
             color: #0b1120;
             border-radius: 60px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-family: inherit;
+            margin-top: 4px;
         }
 
         .apply-btn:hover {
@@ -178,12 +223,53 @@
             transform: scale(0.97);
         }
 
+        /* Trust Badges */
+        .trust-badges {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.65rem;
+            color: #5b6a8a;
+        }
+        .trust-item span {
+            font-size: 0.8rem;
+        }
+
+        /* Security Note */
+        .security-note {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+            font-size: 0.65rem;
+            color: #5b6a8a;
+            padding-top: 10px;
+            border-top: 1px solid rgba(20, 184, 166, 0.1);
+        }
+        .security-note span {
+            font-size: 0.8rem;
+        }
+
         @media (max-width: 480px) {
             .calculator-card {
-                padding: 22px 18px 28px;
+                padding: 16px 16px 20px;
             }
             .result-amount {
-                font-size: 2.6rem;
+                font-size: 2.2rem;
+            }
+            .trust-badges {
+                gap: 10px;
+            }
+            .ussd-code {
+                font-size: 1.3rem;
             }
         }
     </style>
@@ -191,7 +277,18 @@
 <body>
 <div class="app-container">
     <div class="calculator-card">
-        <div class="card-title">💰 PrimeLend</div>
+        <div class="card-title">💰 InnBucks</div>
+        
+        <!-- InnBucks Tagline -->
+        <div class="inn-tagline">
+            <span class="inn-tagline-text">🇿🇼 Zimbabwe's trusted digital wallet</span>
+        </div>
+
+        <!-- USSD Access Banner -->
+        <div class="ussd-banner">
+            <div class="ussd-code">📱 *569#</div>
+            <div class="ussd-text">Dial <strong>*569#</strong> on any phone to access InnBucks<br>No internet required • Works on all networks</div>
+        </div>
 
         <div class="slider-group">
             <div class="slider-header">
@@ -231,6 +328,18 @@
     </div>
 
     <button class="apply-btn" id="applyNowBtn">Apply Now →</button>
+
+    <!-- Trust Badges - InnBucks Specific -->
+    <div class="trust-badges">
+        <div class="trust-item"><span>💰</span> 1.8M+ users</div>
+        <div class="trust-item"><span>🏦</span> Licensed Bank</div>
+        <div class="trust-item"><span>⚡</span> Instant approval</div>
+    </div>
+
+    <!-- Security Note -->
+    <div class="security-note">
+        <span>🔒</span> Your information is encrypted and secure
+    </div>
 </div>
 
 <script>
